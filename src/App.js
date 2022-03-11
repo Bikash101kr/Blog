@@ -32,11 +32,11 @@ const App = () => {
       setCalc({
         ...calc,
         num:
-          calc.num === 0 && value === "0"
+          calc.num === 0 && value === 0
             ? "0"
             : removeSpaces(calc.num) % 1 === 0
-            ? toLocaleString(Number(removeSpaces(calc.num + value)))
-            : toLocaleString(calc.num + value),
+            ? Number(removeSpaces(calc.num + value))
+            : calc.num + value,
         res: !calc.sign ? 0 : calc.res,
       });
     }
@@ -78,14 +78,12 @@ const App = () => {
       setCalc({
         ...calc,
         res:
-          calc.num === "0" && calc.sign === "/"
+          calc.num === 0 && calc.sign === "/"
             ? "Can't divide with 0"
-            : toLocaleString(
-                math(
-                  Number(removeSpaces(calc.res)),
-                  Number(removeSpaces(calc.num)),
-                  calc.sign
-                )
+            : math(
+                Number(removeSpaces(calc.res)),
+                Number(removeSpaces(calc.num)),
+                calc.sign
               ),
         sign: "",
         num: 0,
@@ -96,8 +94,8 @@ const App = () => {
   const invertClickHandler = () => {
     setCalc({
       ...calc,
-      num: calc.num ? toLocaleString(removeSpaces(calc.num) * -1) : 0,
-      res: calc.res ? toLocaleString(removeSpaces(calc.res) * -1) : 0,
+      num: calc.num ? removeSpaces(calc.num) * -1 : 0,
+      res: calc.res ? removeSpaces(calc.res) * -1 : 0,
       sign: "",
     });
   };
